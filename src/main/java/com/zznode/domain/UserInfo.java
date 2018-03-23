@@ -1,12 +1,28 @@
-package com.zznode;
+package com.zznode.domain;
+
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 /**
  * Created by asus on 2018/3/22.
  */
+
+/*@ConfigurationProperties(prefix = "info")//映射application中的info*/
+
+@Entity
+@Component//使其被扫描，注入ioc容器
 public class UserInfo {
     /**
      * 用户id
      */
+    @Id
+    @GeneratedValue
     private Integer id;
     /**
      * 用户名字
@@ -15,6 +31,7 @@ public class UserInfo {
     /**
      * 国籍
      */
+    @NotNull(message = "国籍不能为空")
     private String nationality;
 
     public Integer getId() {
